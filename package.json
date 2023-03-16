@@ -10,6 +10,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^2.0.18"
+    "astro": "^2.0.18",
+    "dotenv": "16.0.3",
+    "p-throttle": "5.0.0",
+    "undici": "5.21.0"
   }
 }
