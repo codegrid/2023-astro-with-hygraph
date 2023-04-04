@@ -1,4 +1,6 @@
 ---
+import BaseLayout from "../../layouts/base-layout.astro";
+
 const res = await fetch(
   "https://api-ap-northeast-1.hygraph.com/v2/clf9ej9ti0tev01upfsb73kfm/master",
   {
@@ -35,23 +37,16 @@ const {
 } = await res.json();
 ---
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>{news.title} | Sample news site</title>
-  </head>
-  <body>
-    <h1>Sample news site</h1>
-    <h2>{news.title}</h2>
-    <p>
-      {
-        Intl.DateTimeFormat("ja").format(
-          new Date(news.publishedAt)
-        )
-      } 公開
-    </p>
-    <p>{news.body}</p>
-    <p>ライター: {news.author.name}</p>
-  </body>
-</html>
+<BaseLayout title={`${news.title} | Sample news site`}>
+  <h1>Sample news site</h1>
+  <h2>{news.title}</h2>
+  <p>
+    {
+      Intl.DateTimeFormat("ja").format(
+        new Date(news.publishedAt)
+      )
+    } 公開
+  </p>
+  <p>{news.body}</p>
+  <p>ライター: {news.author.name}</p>
+</BaseLayout>
