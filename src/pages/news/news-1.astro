@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/base-layout.astro";
+import Header from "../../components/header.astro";
 
 const res = await fetch(
   "https://api-ap-northeast-1.hygraph.com/v2/clf9ej9ti0tev01upfsb73kfm/master",
@@ -38,7 +39,7 @@ const {
 ---
 
 <BaseLayout title={`${news.title} | Sample news site`}>
-  <h1>Sample news site</h1>
+  <Header title="Sample news site" />
   <h2>{news.title}</h2>
   <p>
     {
