@@ -1,0 +1,14 @@
+---
+const { news } = Astro.props;
+---
+
+<h2>{news.title}</h2>
+<p>
+  {
+    Intl.DateTimeFormat("ja").format(
+      new Date(news.publishedAt)
+    )
+  } 公開
+</p>
+<p>{news.body}</p>
+<p>ライター: {news.author.name}</p>

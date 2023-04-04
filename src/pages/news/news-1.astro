@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/base-layout.astro";
 import Header from "../../components/header.astro";
+import NewsDetail from "../../components/news-detail.astro";
 
 const res = await fetch(
   "https://api-ap-northeast-1.hygraph.com/v2/clf9ej9ti0tev01upfsb73kfm/master",
@@ -40,14 +41,5 @@ const {
 
 <BaseLayout title={`${news.title} | Sample news site`}>
   <Header title="Sample news site" />
-  <h2>{news.title}</h2>
-  <p>
-    {
-      Intl.DateTimeFormat("ja").format(
-        new Date(news.publishedAt)
-      )
-    } 公開
-  </p>
-  <p>{news.body}</p>
-  <p>ライター: {news.author.name}</p>
+  <NewsDetail news={news} />
 </BaseLayout>
