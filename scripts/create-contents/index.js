@@ -1,20 +1,18 @@
 import { readFile } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
-import { request } from "undici";
 import pThrottle from "p-throttle";
-import { fetchHygraph } from "./libs/fetch";
 import "dotenv/config";
 
 // ローカルのJSONからHygraphにコンテンツを登録するスクリプト。
 // CommunityプランではHygraphのrate limit(5 req/seq)に引っかかるので、
 // 300msに1回ずつリクエストする。
-const throttledRequest = pThrottle({
+const throttledFetch = pThrottle({
   limit: 1,
   interval: 300,
-})(request);
+})(fetch);
 
 const fetchHygraph = async ({ query, variables }) => {
-  const res = await throttledRequest(
+  const res = await throttledFetch(
     "https://api-ap-northeast-1.hygraph.com/v2/clf9ej9ti0tev01upfsb73kfm/master",
     {
       method: "POST",
@@ -26,10 +24,10 @@ const fetchHygraph = async ({ query, variables }) => {
     }
   );
 
-  if (res.statusCode >= 400)
-    throw new Error(await res.body.text());
+  if (!res.ok)
+    throw new Error(await res.text());
 
-  return res.body.json();
+  return res.json();
 };
 
 const main = async () => {
