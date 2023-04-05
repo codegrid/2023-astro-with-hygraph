@@ -1,0 +1,17 @@
+---
+const { newsCollection } = Astro.props;
+---
+
+{
+  newsCollection.length === 0 ? (
+    <p>ニュースはありません</p>
+  ) : (
+    <ul>
+      {newsCollection.map(({ slug, title }) => (
+        <li>
+          <a href={slug}>{title}</a>
+        </li>
+      ))}
+    </ul>
+  )
+}

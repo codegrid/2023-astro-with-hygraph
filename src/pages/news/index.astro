@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../../layouts/base-layout.astro";
+import Header from "../../components/header.astro";
+import NewsList from "../../components/news-list.astro";
+
+const res = await fetch(
+  "https://api-ap-northeast-1.hygraph.com/v2/clf9ej9ti0tev01upfsb73kfm/master",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${
+        import.meta.env.HYGRAPH_QUERY_PAT
+      }`,
+    },
+    body: JSON.stringify({
+      query: `
+        query {
+          newsCollection (stage:PUBLISHED) {
+            slug
+            title
+          }
+        }
+      `,
+    }),
+  }
+);
+
+if (!res.ok)
+  throw new Error(`Fetch failed: ${await res.text()}`);
+
+const {
+  data: { newsCollection },
+} = await res.json();
+---
+
+<BaseLayout title="Sample news site">
+  <Header title="Sample news site" />
+  <NewsList newsCollection={newsCollection} />
+</BaseLayout>
