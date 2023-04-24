@@ -10,9 +10,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^2.0.18",
+    "@astrojs/svelte": "2.1.0",
+    "astro": "2.2.0",
     "dotenv": "16.0.3",
     "p-throttle": "5.0.0",
+    "svelte": "3.58.0",
     "undici": "5.21.0"
   }
 }
