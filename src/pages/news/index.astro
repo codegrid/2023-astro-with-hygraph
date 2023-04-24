@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/base-layout.astro";
 import Header from "../../components/header.astro";
 import NewsList from "../../components/news-list.astro";
+import AccountInfo from "../../components/account-info.svelte";
 
 const res = await fetch(
   "https://api-ap-northeast-1.hygraph.com/v2/clf9ej9ti0tev01upfsb73kfm/master",
@@ -36,5 +37,6 @@ const {
 
 <BaseLayout title="Sample news site">
   <Header title="Sample news site" />
+  <AccountInfo client:load />
   <NewsList newsCollection={newsCollection} />
 </BaseLayout>
