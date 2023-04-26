@@ -1,6 +1,4 @@
 <script>
-  import { onMount } from "svelte";
-  import { fetchAccount } from "../libs/api";
   import { account } from "../stores/account";
 
   const login = () => {
