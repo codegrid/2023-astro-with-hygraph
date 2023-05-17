@@ -59,7 +59,7 @@ const main = async () => {
   console.log("--> Completed.");
 
   console.log("--- Read news.");
-  const newses = JSON.parse(
+  const newsCollection = JSON.parse(
     await readFile(resolve(__dirname, "./news.json"), {
       encoding: "utf-8",
     })
@@ -68,7 +68,7 @@ const main = async () => {
 
   console.log("--- Write news.");
   await Promise.all(
-    newses.map((news) =>
+    newsCollection.map((news) =>
       fetchHygraph({
         query: `
           mutation ($slug: String! $title: String! $body: String! $author: String!){
