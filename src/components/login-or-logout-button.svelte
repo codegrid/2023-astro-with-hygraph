@@ -1,5 +1,5 @@
 <script>
-  import { account } from "../stores/account";
+  import { account, accountLoaded } from "../stores/account";
 
   const login = () => {
     document.cookie =
@@ -14,8 +14,10 @@
   };
 </script>
 
-{#if $account === null}
-  <button on:click={login} type="button">Login</button>
-{:else}
-  <button on:click={logout} type="button">Logout</button>
+{#if $accountLoaded}
+  {#if $account === null}
+    <button on:click={login} type="button">Login</button>
+  {:else}
+    <button on:click={logout} type="button">Logout</button>
+  {/if}
 {/if}
