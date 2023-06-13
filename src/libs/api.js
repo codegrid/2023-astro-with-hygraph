@@ -1,3 +1,8 @@
 export const fetchAccount = () => {
-  return { name: "cancer" };
-}
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log("api respond");
+      resolve({ name: "cancer" })
+    }, 500);
+  });
+};

@@ -1,16 +1,13 @@
 <script>
-  import { onMount } from "svelte";
-  import { fetchAccount } from "../libs/api";
-  import { account } from "../stores/account";
-
-  onMount(async () => {
-    const _account = await fetchAccount();
-    account.set(_account);
-  });
+  import { account, accountLoaded } from "../stores/account";
 </script>
 
-{#if $account !== null}
-  <p>ようこそ {$account.name} さん</p>
+{#if $accountLoaded}
+  {#if $account !== null}
+    <p>ようこそ {$account.name} さん</p>
+  {:else}
+    <p>ようこそ ゲスト さん</p>
+  {/if}
 {:else}
   <div>...Loading</div>
 {/if}
