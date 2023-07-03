@@ -2,6 +2,9 @@
 import BaseLayout from "../../layouts/base-layout.astro";
 import Header from "../../components/header.astro";
 import NewsDetail from "../../components/news-detail.astro";
+import AccountInfo from "../../components/account-info.svelte";
+import LoginOrLogoutButton from "../../components/login-or-logout-button.svelte";
+import SetupAccount from "../../components/setup-account.svelte";
 
 export const getStaticPaths = async () => {
   const res = await fetch(
@@ -49,6 +52,9 @@ const { news } = Astro.props;
 ---
 
 <BaseLayout title={`${news.title} | Sample news site`}>
+  <SetupAccount client:only="svelte" />
   <Header title="Sample news site" />
+  <AccountInfo client:load />
+  <LoginOrLogoutButton client:load />
   <NewsDetail news={news} />
 </BaseLayout>
