@@ -17,7 +17,7 @@ export const getStaticPaths = async () => {
       body: JSON.stringify({
         query: `
         query {
-          newses (stage: PUBLISHED){
+          newsCollection (stage: PUBLISHED){
             slug
             title
             body
@@ -36,10 +36,10 @@ export const getStaticPaths = async () => {
     throw new Error(`Fetch failed: ${await res.text()}`);
 
   const {
-    data: { newses },
+    data: { newsCollection },
   } = await res.json();
 
-  return newses.map((news) => ({
+  return newsCollection.map((news) => ({
     params: { slug: news.slug },
     props: { news },
   }));
